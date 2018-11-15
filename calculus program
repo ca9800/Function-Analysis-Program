@@ -55,21 +55,20 @@ for x in range (a,b+1):
     x = x + 2*h
     fj = eval(f)
     f2.append(fj)
-    
-print ("f2 = ", f2)
+
 
 f5 = []                         # f(x+2h)-f(x+h)/h or f'(x+h)
 for x in range (a,b+1):   
     x = x+h
     fp = eval(f)
     f5.append(fp)
-print ("f5 = ", f5)
+
 
 f6 = []
 for x in range (a,b+1):
     q = (f2[x]-f5[x])/(h)
     f6.append(q)
-print ("f6 = ", f6)
+
 
 f3 = []                         # f(x+h)-f(x)/h or f'(x)
 for x in range(a, b+1):
@@ -82,7 +81,6 @@ for x in range(a, b+1):
     ae = (f3[x]-f1[x])/h
     f4.append(ae)
     
-print ("f3 = ", f3)
 
 fdouble = []                    # actual f' 
 for x in range (a, b+1):
