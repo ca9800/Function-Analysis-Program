@@ -6,12 +6,15 @@ NOTES:
 
 """
 from ggame import App, Color, LineStyle, Sprite, RectangleAsset, CircleAsset, EllipseAsset, PolygonAsset
-from math import sin, cos, radians
+from math import sin, cos, tan, radians
 
 #inputs
 f = input("enter a function equal to f(x) in terms of x: ")         #user inputs the funciton they want
-a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function 
-b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
+#a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function 
+#b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
+a = -2
+b = 2
+
 
 fx = range(a, b+1)
 (list(fx))   #list of x-values
@@ -95,8 +98,7 @@ print (fdouble)
 
 
 print (" ") 
-for x in range (a,b+1):
-    x=x
+
 print("absolute min: ", (x, min(f1)))
 print("absolute max: ", (x, max(f1)))
 
