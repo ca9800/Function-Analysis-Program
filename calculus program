@@ -103,17 +103,17 @@ print("absolute max: ", (x, max(f1)))
 
 
 if f1[x] <= 0:
-    print ("fprime is decreasing") 
+    print ("f(x) is decreasing") 
 
 
 if f1[x] >= 0:
-    print ("fprime is increasing") 
-    
+    print ("f(x) is increasing") 
+
 if fprime[x] <= 0:
-    print ("fprime is concave down") 
+    print ("f(x) is concave down") 
 
 if fprime[x] >= 0:
-    print ("fprime is concave up") 
+    print ("f(x) is concave up") 
 
 
 
