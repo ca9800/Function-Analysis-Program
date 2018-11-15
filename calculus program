@@ -5,78 +5,112 @@ NOTES:
 - print (x, ",", eval(f)) 
 
 """
-
+from ggame import App, Color, LineStyle, Sprite, RectangleAsset, CircleAsset, EllipseAsset, PolygonAsset
 from math import sin, cos, radians
 
 #inputs
 f = input("enter a function equal to f(x) in terms of x: ")         #user inputs the funciton they want
-#a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function 
-#b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
-a = 0 # lower limit
-b = 10 # upper limit
-h = 0.000000001                 #defines delta x or h
+a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function 
+b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
+
+fx = range(a, b+1)
+(list(fx))   #list of x-values
+h = 0.001                 #defines delta x or h
 
 
 ########_finds f'
 f1 = []                         # creates f1 which is a list that will contain y values for the function
-for x in range(a,b+1):          
-   f1.append(eval(f))           #calcuates f(x) and puts in f1
+for x in range(a,b+1):
+    hk = eval(f)
+    f1.append(hk)           #calcuates f(x) and puts in f1
+
 
 
 fprime = []                     #creates a list that will contain fprimes
 for x in range (a,b+1):         
    x = h+x                      #redefines x as x + h to find f(x+h)
    fh= eval(f)                  #calculates f(x+h)
-   x = int(x-h+.1)-a            #redefines x so that it points to the coresponding f(x) value in f1
-   p = round(((fh-f1[x])/h), 5) #rounds fprime
+   x = float(x-h+.1)-a            #redefines x so that it points to the coresponding f(x) value in f1
+   p = round(((fh-f1[x])/h), 4) #rounds fprime
    fprime.append(p)             # calculates the derivitive using the definition of a derivitive and puts in fprime
 
 
 
 #prints function outputs
+print (" ") 
 print ("f(x) in range", a, "to", b, "equals: ") 
 print (f1)
 
+print (" ") 
 print ("f'(x) in range", a, "to", b, "equals: ") 
 print (fprime)
 
-print("absolute min: ", min(f1))
-print("absolute max: ", max(f1))
 
 
-##############_finding f''
 
-fh2 = []
-for x in range(a,b+1):
-    x = h+x                      #redefines x as x + h to find f(x+h)
-    num = eval(f)
-    fh2.append(num)
+##############_finding f"
 
-f2 = []
+f2 = []                         # f(x+2h)-f(x+h)/h or f'(x+h)
 for x in range (a,b+1):
     x = x + 2*h
     fj = eval(f)
-    #x = int(x-h+.1)-a 
-    #q = round((((fj-fh2[x])/h) - ((fh2[x]-f1[x])/h))/h, 5 )
-    q = (((fj-fh2[x])/h) - ((fh2[x]-f1[x])/h))/h
-    f2.append(q)
+    f2.append(fj)
     
+print ("f2 = ", f2)
 
+f5 = []                         # f(x+2h)-f(x+h)/h or f'(x+h)
+for x in range (a,b+1):   
+    x = x+h
+    fp = eval(f)
+    f5.append(fp)
+print ("f5 = ", f5)
 
-print (f2)
+f6 = []
+for x in range (a,b+1):
+    q = (f2[x]-f5[x])/(h)
+    f6.append(q)
+print ("f6 = ", f6)
 
+f3 = []                         # f(x+h)-f(x)/h or f'(x)
+for x in range(a, b+1):
+    x = x + h
+    fi = eval(f)
+    f3.append(fi)
+    
+f4 = []                         # f(x+h)-f(x)/h or f'(x)
+for x in range(a, b+1):  
+    ae = (f3[x]-f1[x])/h
+    f4.append(ae)
+    
+print ("f3 = ", f3)
 
+fdouble = []                    # actual f' 
+for x in range (a, b+1):
+    s = round((f6[x]-f4[x])/h, 5)
+    fdouble.append(s)
+    
+print (" ")  
+print ("f''(x) in range", a, "to", b, "equals: ") 
+print (fdouble)
 
+print (" ") 
+print("absolute min: ", (x, min(f1)))
+print("absolute max: ", (x, max(f1)))
 
+if fprime[] <= 0:
+    print ("fprime is decreasing") 
+
+if fprime[] >= 0:
+    print ("fprime is increasing") 
 
 
 
 """
 #####################_finds concavity using f''
 #extrema at interior pts
-if fprime.append(eval(f))==0 in list(fprime) and fdouble.append(eval(f))<0 in list(fdouble) :
+if fdouble.append(eval(f))==0 in list(fprime) and fdouble.append(eval(f))<0 in list(fdouble) :
     print("local max @")
-if fprime.append(eval(f))==0 in list(fprime) and fdouble.append(eval(f))>0 in list(fdouble) :
+if fdouble.append(eval(f))==0 in list(fprime) and fdouble.append(eval(f))>0 in list(fdouble) :
     print("local min @")
 
 
@@ -96,9 +130,64 @@ if fprime(b)<0:
 
 
 #pts of inflection:
-#if fprime2.append(Eval(f))=0 in list(fprime2) and
+if fdouble.append(eval(f))=0 in list(fdouble) and
 # +/-h are positive and negative=> POI
-
-
+"""
 
 """
+# colors
+red = Color(0xff0000, 1.0)
+blue = Color(0x0000ff, 1.0)
+purple = Color(0x800080, 1.0)
+black = Color(0x000000, 1.0)
+# thin black line
+thinline = LineStyle(1, black)
+
+#circles
+circle_blue = CircleAsset (10, thinline, blue)
+circle_red = CircleAsset (10, thinline, red)
+circle_purple = CircleAsset (10, thinline, purple)
+
+#range definition
+x = range(0, 370, 10) 
+
+
+sprites = [Sprite (circle_blue, (anx,(100+100*sin(radians(anx))))) for anx in x]
+
+sprites = [Sprite (circle_blue, (anx,(fprime[x]))) for anx in x]
+
+sprites = [Sprite (circle_red, (anx,(100+100*cos(radians(anx))))) for anx in x]
+sprites = [Sprite (circle_purple, (100+100*cos(radians(anx)),400+100*sin(radians(anx)))) for anx in x]
+
+myapp = App()
+myapp.run()
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
