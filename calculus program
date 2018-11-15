@@ -83,6 +83,7 @@ for x in range(a, b+1):
     
 
 fdouble = []                    # actual f' 
+
 for x in range (a, b+1):
     s = round((f6[x]-f4[x])/h, 5)
     fdouble.append(s)
