@@ -104,7 +104,7 @@ print("absolute max: ", (x, max(f1)))
 
 
 
-while x in range (a,b+1) <= 0:
+while fprime[x] in range (a,b+1) <= 0:
     print ("for x in range ", x, "f(x) is decreasing")
 
 
