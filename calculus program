@@ -102,16 +102,28 @@ print (" ")
 print("absolute min: ", (x, min(f1)))
 print("absolute max: ", (x, max(f1)))
 
+x=0
+#for x in [.1(j)/ 100 for j in range(a, b+1, 1)]:       get it so incriments can be decimals
+for x in range(a,b+1, 1):
+    if fh[x] - f1[x] >= 0:
+        print ("the function is increasing")
+        slope_positive = 1
+    if fh[x] - f1[x] <= 0:
+        print ("the function is decreasing")
+    
+    
 
-
-while fprime[x] in range (a,b+1) <= 0:
-    print ("for x in range ", x, "f(x) is decreasing")
 
 
 
 
 
 """
+
+while fprime[x] in range (a,b+1) <= 0:
+    print ("for x in range ", x, "f(x) is decreasing")
+    
+    
 if f1[x] <= 0:
     print ("f(x) is decreasing") 
 
@@ -158,35 +170,7 @@ if fdouble.append(eval(f))=0 in list(fdouble) and
 # +/-h are positive and negative=> POI
 """
 
-"""
-# colors
-red = Color(0xff0000, 1.0)
-blue = Color(0x0000ff, 1.0)
-purple = Color(0x800080, 1.0)
-black = Color(0x000000, 1.0)
-# thin black line
-thinline = LineStyle(1, black)
 
-#circles
-circle_blue = CircleAsset (10, thinline, blue)
-circle_red = CircleAsset (10, thinline, red)
-circle_purple = CircleAsset (10, thinline, purple)
-
-#range definition
-x = range(0, 370, 10) 
-
-
-sprites = [Sprite (circle_blue, (anx,(100+100*sin(radians(anx))))) for anx in x]
-
-sprites = [Sprite (circle_blue, (anx,(fprime[x]))) for anx in x]
-
-sprites = [Sprite (circle_red, (anx,(100+100*cos(radians(anx))))) for anx in x]
-sprites = [Sprite (circle_purple, (100+100*cos(radians(anx)),400+100*sin(radians(anx)))) for anx in x]
-
-myapp = App()
-myapp.run()
-
-"""
 
 
 
