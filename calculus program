@@ -103,13 +103,7 @@ print("absolute min: ", (x, min(f1)))
 print("absolute max: ", (x, max(f1)))
 
 x=0
-#for x in [.1(j)/ 100 for j in range(a, b+1, 1)]:       get it so incriments can be decimals
-for x in range(a,b+1, 1):
-    if fh[x] - f1[x] >= 0:
-        print ("the function is increasing")
-        slope_positive = 1
-    if fh[x] - f1[x] <= 0:
-        print ("the function is decreasing")
+
     
     
 
@@ -137,8 +131,15 @@ if fprime[x] <= 0:
 if fprime[x] >= 0:
     print ("f(x) is concave up") 
 """
-
-
+"""
+#for x in [.1(j)/ 100 for j in range(a, b+1, 1)]:       get it so incriments can be decimals
+for x in range(a,b+1, 1):
+    if fh[x] - f1[x] >= 0:
+        print ("the function is increasing")
+        slope_positive = 1
+    if fh[x] - f1[x] <= 0:
+        print ("the function is decreasing")
+"""
 
 
 """
