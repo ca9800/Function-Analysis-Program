@@ -14,6 +14,7 @@ f = input("enter a function equal to f(x) in terms of x: ")         #user inputs
 #b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
 a = -5
 b = 5
+
 rangee = list(range(a,b+1))
 
 
@@ -111,163 +112,61 @@ for x in range(a-1, b):
 print (" ")  
 print ("f''(x) in range", a, "to", b, "equals: ") 
 print (fdouble)
-print("don")
 
-print (" ") 
 
-print("absolute min: ", (x, min(f1)))
-print("absolute max: ", (x, max(f1)))
-
-
-
-
-#####concacity attemps
-fminus = []
-for x in range(a, b+1):
-    x = x-2*h
-    fg = eval(f)
-    fminus.append(fg)
-
-fminuss = []
-for x in range(a, b+1):
-    x = x-h
-    fgg = eval(f)
-    fminuss.append(fgg)
-
-doge = []                           #doge needs list
-for x in range(a, b+1):
-    dog = (fminus[x] -fminuss[x])/h
-    doge.append(dog)
-
-
-print (list(range(a, b+1)))
-print ("fprime", fprime)
-print ("doge", doge)
-
-claire = []
-for x in range(a,b+1):                          #########finding f''(x+h)
-    meme = (fprime[x] - doge[x])/h
-    claire.append(meme)
-print("meme", meme)
-
-
-fdoublexh = []
-for x in range(a, b+1):
-    help = fdouble[x] - claire[x]
-    fdoublexh.append(help)
-    
-print ("here", fdoublexh)
-
-
-
-listl = []
-
-for x in range (a,b+1):
-    if fdoublexh[x] > 0 and fdouble[x] < 0:                     
-        listl.append(x)
-        
-    elif fdoublexh[x] < 0 and fdouble[x] > 0:                 
-        listl.append(x)
-    
-    else:
-        print('sorry')
-    
-print ("!!", listl)
-  
-
-
-
-
-
-
-"""
-x=0
-#for x in [.1(j)/ 100 for j in range(a, b+1, 1)]:       get it so incriments can be decimals
-for x in range(a,b+1, 1):
-    if fh[x] - f1[x] >= 0:
-        print ("the function is increasing")
-        slope_positive = 1
-    if fh[x] - f1[x] <= 0:
-        print ("the function is decreasing")
-        
-        
-        
-while fprime[x] in range (a,b+1) <= 0:
-    print ("for x in range ", x, "f(x) is decreasing")
-    
-    
-if f1[x] <= 0:
-    print ("f(x) is decreasing") 
-
-
-if f1[x] >= 0:
-    print ("f(x) is increasing") 
-
-if fprime[x] <= 0:
-    print ("f(x) is concave down") 
-
-if fprime[x] >= 0:
-    print ("f(x) is concave up") 
-"""
-
-
-
-
-"""
-#####################_finds concavity using f''
-#extrema at interior pts
-if fdouble.append(eval(f))==0 in list(fprime) and fdouble.append(eval(f))<0 in list(fdouble) :
-    print("local max @")
-if fdouble.append(eval(f))==0 in list(fprime) and fdouble.append(eval(f))>0 in list(fdouble) :
-    print("local min @")
-
-
-
-
-
-
-#loop and figure out how to get x-value & include where fprime=DNE 1/0
-
-#extrema at endpts
-if fprime(a)<0:
-    print ("local max @ x=", a)
-if fprime(b)>0:
-    print ("local max @ x=", a)
-if fprime(b)<0:
-    print ("local min @ x=", a)
-
-
-#pts of inflection:
-if fdouble.append(eval(f))=0 in list(fdouble) and
-# +/-h are positive and negative=> POI
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print ("h ") 
+
+#print("absolute min: ", (x, min(f1)))
+#print("absolute max: ", (x, max(f1)))
+
+###############################################
+### Creates function, first and second derivatives
+
+tstep = .1
+xyList0 = []
+t = a
+#create a list of xy values, each x will be tstep apart
+#f(x)
+while t<b+1:
+    x=t
+    xyList0.append((t, eval(f)))
+    t += tstep
+
+
+xyList1 = []
+t = a
+#create a list of xy values, each x will be tstep apart
+#f'(x)
+while t<b+1:
+    xyList1.append((t, (xyList0[t+tstep][1]-xyList0[t][1])/tstep ))
+    t += tstep
+
+xyList2 = []
+t = a
+#create a list of xy values, each x will be tstep apart
+#f''(x)
+while t<b+1:
+    xyList2.append((t, (xyList1[t+tstep][1]-xyList1[t][1])/tstep ))
+    t += tstep
+
+################################################
+
+flex = []
+t = a
+currentN = 0
+currentL = 1
+while t<b+1:
+    currentL = currentN
+    if abs(xyList2[t+tstep][1]) < abs(xyList2[t][1]):
+        currentN = (t, xyList2[t+tstep][0], xyList2[t+tstep][1])
+    if currentN == currentL:
+        flex.append(currentN)
+    t += tstep
+print(xyList0)
+print()
+print(xyList1)
+print()
+print(xyList2)
+print()
+
+print(flex)
