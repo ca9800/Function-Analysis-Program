@@ -14,11 +14,12 @@ f = input("enter a function equal to f(x) in terms of x: ")         #user inputs
 #b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
 a = -5
 b = 5
+rangee = list(range(a,b+1))
 
 
 fx = range(a, b+1)
 (list(fx))   #list of x-values
-h = 0.001                 #defines delta x or h
+h = 0.000001                 #defines delta x or h
 
 
 ########_finds f'
@@ -29,13 +30,26 @@ for x in range(a,b+1):
 
 
 
-fprime = []                     #creates a list that will contain fprimes
+fprime = []     #creates a list that will contain fprimes
+crit = [a]
 for x in range (a,b+1):         
    x = h+x                      #redefines x as x + h to find f(x+h)
    fh= eval(f)                  #calculates f(x+h)
    x = float(x-h+.1)-a            #redefines x so that it points to the coresponding f(x) value in f1
    p = round(((fh-f1[x])/h), 4) #rounds fprime
    fprime.append(p)             # calculates the derivitive using the definition of a derivitive and puts in fprime
+   
+
+for ppp in fprime:
+    pos = fprime.index(ppp)         # position of ppp in fprime
+    if ppp>= -0.05 and ppp<=0.05:
+        x = rangee[pos]
+        crit.append(x)
+crit.append(b)          #adds b to critical values
+print("critical x-values",crit)
+for cc in crit:
+    print("(", cc , "," , eval(f), ")")
+
 
 
 
@@ -87,25 +101,79 @@ for x in range(a, b+1):
 
 fdouble = []                    # actual f' 
 
-for x in range (a, b+1):
-    s = round((f6[x]-f4[x])/h, 5)
+for x in range(a-1, b):
+    s = round((f6[x]-f4[x])/h, 3)
     fdouble.append(s)
-    
+
+
+
+
 print (" ")  
 print ("f''(x) in range", a, "to", b, "equals: ") 
 print (fdouble)
-
-
+print("don")
 
 print (" ") 
 
 print("absolute min: ", (x, min(f1)))
 print("absolute max: ", (x, max(f1)))
 
-x=0
 
+
+
+#####concacity attemps
+fminus = []
+for x in range(a, b+1):
+    x = x-2*h
+    fg = eval(f)
+    fminus.append(fg)
+
+fminuss = []
+for x in range(a, b+1):
+    x = x-h
+    fgg = eval(f)
+    fminuss.append(fgg)
+
+doge = []                           #doge needs list
+for x in range(a, b+1):
+    dog = (fminus[x] -fminuss[x])/h
+    doge.append(dog)
+
+
+print (list(range(a, b+1)))
+print ("fprime", fprime)
+print ("doge", doge)
+
+claire = []
+for x in range(a,b+1):                          #########finding f''(x+h)
+    meme = (fprime[x] - doge[x])/h
+    claire.append(meme)
+print("meme", meme)
+
+
+fdoublexh = []
+for x in range(a, b+1):
+    help = fdouble[x] - claire[x]
+    fdoublexh.append(help)
     
+print ("here", fdoublexh)
+
+
+
+listl = []
+
+for x in range (a,b+1):
+    if fdoublexh[x] > 0 and fdouble[x] < 0:                     
+        listl.append(x)
+        
+    elif fdoublexh[x] < 0 and fdouble[x] > 0:                 
+        listl.append(x)
     
+    else:
+        print('sorry')
+    
+print ("!!", listl)
+  
 
 
 
@@ -113,7 +181,17 @@ x=0
 
 
 """
-
+x=0
+#for x in [.1(j)/ 100 for j in range(a, b+1, 1)]:       get it so incriments can be decimals
+for x in range(a,b+1, 1):
+    if fh[x] - f1[x] >= 0:
+        print ("the function is increasing")
+        slope_positive = 1
+    if fh[x] - f1[x] <= 0:
+        print ("the function is decreasing")
+        
+        
+        
 while fprime[x] in range (a,b+1) <= 0:
     print ("for x in range ", x, "f(x) is decreasing")
     
@@ -131,15 +209,8 @@ if fprime[x] <= 0:
 if fprime[x] >= 0:
     print ("f(x) is concave up") 
 """
-"""
-#for x in [.1(j)/ 100 for j in range(a, b+1, 1)]:       get it so incriments can be decimals
-for x in range(a,b+1, 1):
-    if fh[x] - f1[x] >= 0:
-        print ("the function is increasing")
-        slope_positive = 1
-    if fh[x] - f1[x] <= 0:
-        print ("the function is decreasing")
-"""
+
+
 
 
 """
