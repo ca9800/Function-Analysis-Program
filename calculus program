@@ -160,20 +160,31 @@ t = a
 count = 0
 currentN = 0
 currentL = 1
+diff = 0
+
 while t<b-3*tstep:
     currentL = currentN
+    diff = abs(xyList2[count][1]) - abs(xyList2[count-1][1])
     if abs(xyList2[count+1][1]) < abs(xyList2[count][1]):
-        currentN = (count, xyList2[t+tstep][0], xyList2[t+tstep][1])
-    if currentN == currentL:
-        flex.append(currentN)
+        currentN = (xyList2[count+1][0], xyList2[count+1][1])
+
+    if currentN == currentL and diff<0:
+        flex.append((count-1, currentN[0], currentN[1]))
+    
+    '''
+    if abs(xyList2[count][1]) < .2:
+        flex.append((count, xyList2[count][0], xyList2[count][1]))
+    '''
     t += tstep
     count +=1
-
+    
+    
+    
 #print(xyList0)
 print()
 #print(xyList1)
 print()
-print(xyList2)
+#print(xyList2)
 print()
 
-#print(flex)
+print(flex)
