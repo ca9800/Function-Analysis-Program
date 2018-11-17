@@ -122,7 +122,7 @@ print ("h ")
 ###############################################
 ### Creates function, first and second derivatives
 
-tstep = .1
+tstep = .01
 xyList0 = []
 t = a
 #create a list of xy values, each x will be tstep apart
@@ -149,9 +149,11 @@ count = 0
 #create a list of xy values, each x will be tstep apart
 #f''(x)
 while t<b-2*tstep:
-    xyList2.append((t, (xyList1[count+1][1]-xyList1[count][1])/tstep ))
+    xyList2.append((t, round((xyList1[count+1][1]-xyList1[count][1])/tstep, 7) ))
     t += tstep
     count +=1
+    
+    
 
 ################################################
 
@@ -168,7 +170,7 @@ while t<b-3*tstep:
     if abs(xyList2[count+1][1]) < abs(xyList2[count][1]):
         currentN = (xyList2[count+1][0], xyList2[count+1][1])
 
-    if currentN == currentL and diff<0:
+    if currentN == currentL and diff<0 and not(isinstance(currentN, int)):
         flex.append((count-1, currentN[0], currentN[1]))
     
     '''
@@ -187,4 +189,5 @@ print()
 #print(xyList2)
 print()
 
-print(flex)
+print("points of infelction for function f(x) in range", a, "to", b, "equal", flex)
+
