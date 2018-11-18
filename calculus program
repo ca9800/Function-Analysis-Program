@@ -190,7 +190,7 @@ while t<len(crit)-1: #while t is less then the length of the list of critical va
         conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave down")) #its concave down
     elif xyList2[crit[t][0]+5][1] > 0: #if some point between the current and the next critical values is >0
         conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave up")) #its concave up
-    t+=1 #makes t 
+    t+=1 #makes t = t+1
 print(conch)
     
 #print(xyList0)
