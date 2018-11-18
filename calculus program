@@ -10,10 +10,10 @@ from math import sin, cos, tan, radians
 
 #inputs
 f = input("enter a function equal to f(x) in terms of x: ")         #user inputs the funciton they want
-#a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function 
-#b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
-a = -5
-b = 5
+a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function 
+b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
+
+
 
 rangee = list(range(a,b+1))
 
@@ -114,10 +114,12 @@ print ("f''(x) in range", a, "to", b, "equals: ")
 print (fdouble)
 
 
-print ("h ") 
 
-#print("absolute min: ", (x, min(f1)))
-#print("absolute max: ", (x, max(f1)))
+
+
+
+
+
 
 ###############################################
 ### Creates function, first and second derivatives
@@ -191,14 +193,15 @@ while t<len(crit)-1: #while t is less then the length of the list of critical va
     elif xyList2[crit[t][0]+5][1] > 0: #if some point between the current and the next critical values is >0
         conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave up")) #its concave up
     t+=1 #makes t = t+1
+
+print ()
 print(conch)
     
 #print(xyList0)
-print()
+#print()
 #print(xyList1)
-print()
+#print()
 #print(xyList2)
 print()
-
-#print("points of infelction for function f(x) in range", a, "to", b, "equal", flex)
+print("points of infelction for function f(x) in range", a, "to", b, "equal", flex)
 
