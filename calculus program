@@ -122,7 +122,7 @@ print ("h ")
 ###############################################
 ### Creates function, first and second derivatives
 
-tstep = .01
+tstep = .1
 xyList0 = []
 t = a
 #create a list of xy values, each x will be tstep apart
@@ -149,7 +149,7 @@ count = 0
 #create a list of xy values, each x will be tstep apart
 #f''(x)
 while t<b-2*tstep:
-    xyList2.append((t, round((xyList1[count+1][1]-xyList1[count][1])/tstep, 7) ))
+    xyList2.append((round(t, 7), round((xyList1[count+1][1]-xyList1[count][1])/tstep, 7) ))
     t += tstep
     count +=1
     
@@ -157,30 +157,50 @@ while t<b-2*tstep:
 
 ################################################
 
-flex = []
-t = a
-count = 0
-currentN = 0
-currentL = 1
+# Finds the points of inflection by finding the ones that are close to zero
+flex = [] # list that will contains points
+t = a # gives starting point for x
+count = 0 # records position in current list and allows for access to second deriv
+currentN = 0 # current lowest point
+currentL = 1 # last lowest point
 diff = 0
 
 while t<b-3*tstep:
     currentL = currentN
-    diff = abs(xyList2[count][1]) - abs(xyList2[count-1][1])
+    diff = abs(xyList2[count][1]) - abs(xyList2[count-1][1]) # 
     if abs(xyList2[count+1][1]) < abs(xyList2[count][1]):
         currentN = (xyList2[count+1][0], xyList2[count+1][1])
 
-    if currentN == currentL and diff<0 and not(isinstance(currentN, int)):
+    if currentN == currentL and diff<0:
         flex.append((count-1, currentN[0], currentN[1]))
-    
-    '''
-    if abs(xyList2[count][1]) < .2:
-        flex.append((count, xyList2[count][0], xyList2[count][1]))
-    '''
     t += tstep
     count +=1
     
-    
+# Makes critical values
+Crit = [a]
+for x in flex:
+    Crit.append(x[1])
+Crit.append(b)
+
+
+# Makes useful critical values
+crit = [(0, xyList0[0][0], xyList0[0][1])]
+for x in flex:
+    crit.append(x)
+crit.append((count+2, xyList0[count+2][0], xyList0[count+2][1]))
+#print(crit)
+
+# find concave up/down
+conch = []
+t=0
+while t<len(crit)-1:
+    if xyList2[crit[t][0]+5][1] < 0:
+        conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave down"))
+    elif xyList2[crit[t][0]+5][1] > 0:
+        conch.append(str("From "+crit[t][1]+" to "+crit[t+1][1]+": concave up"))
+    print(t)
+    t+=1
+print(conch)
     
 #print(xyList0)
 print()
@@ -189,5 +209,5 @@ print()
 #print(xyList2)
 print()
 
-print("points of infelction for function f(x) in range", a, "to", b, "equal", flex)
+#print("points of infelction for function f(x) in range", a, "to", b, "equal", flex)
 
