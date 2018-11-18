@@ -176,19 +176,11 @@ while t<b-3*tstep:
     t += tstep
     count +=1
     
-# Makes critical values
-Crit = [a]
-for x in flex:
-    Crit.append(x[1])
-Crit.append(b)
-
-
 # Makes useful critical values
 crit = [(0, xyList0[0][0], xyList0[0][1])]
 for x in flex:
     crit.append(x)
 crit.append((count+2, xyList0[count+2][0], xyList0[count+2][1]))
-#print(crit)
 
 # find concave up/down
 conch = []
@@ -197,8 +189,7 @@ while t<len(crit)-1:
     if xyList2[crit[t][0]+5][1] < 0:
         conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave down"))
     elif xyList2[crit[t][0]+5][1] > 0:
-        conch.append(str("From "+crit[t][1]+" to "+crit[t+1][1]+": concave up"))
-    print(t)
+        conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave up"))
     t+=1
 print(conch)
     
