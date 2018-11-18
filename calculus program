@@ -166,19 +166,19 @@ currentL = 1 # last lowest point
 diff = 0
 
 while t<b-3*tstep:
-    currentL = currentN
-    diff = abs(xyList2[count][1]) - abs(xyList2[count-1][1]) # 
-    if abs(xyList2[count+1][1]) < abs(xyList2[count][1]):
-        currentN = (xyList2[count+1][0], xyList2[count+1][1])
+    currentL = currentN # saves the current lowest value
+    diff = abs(xyList2[count][1]) - abs(xyList2[count-1][1]) # calculates wether or not approaching X axis
+    if abs(xyList2[count+1][1]) < abs(xyList2[count][1]): # if the next is less than the current
+        currentN = (xyList2[count+1][0], xyList2[count+1][1]) # set the current as the lowest
 
-    if currentN == currentL and diff<0:
-        flex.append((count-1, currentN[0], currentN[1]))
-    t += tstep
-    count +=1
+    if currentN == currentL and diff<0:# if the saved and the new lowest are the same, and approaching Xaxis
+        flex.append((count-1, currentN[0], currentN[1])) # append value to inflection points (flex)
+    t += tstep #goes through the x values in the given range a to be in tstep steps
+    count +=1 #reffers to index placement
     
 # Makes useful critical values
-crit = [(0, xyList0[0][0], xyList0[0][1])]
-for x in flex:
+crit = [(0, xyList0[0][0], xyList0[0][1])] #places start point as cirtical value
+for x in flex: #
     crit.append(x)
 crit.append((count+2, xyList0[count+2][0], xyList0[count+2][1]))
 
