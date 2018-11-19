@@ -1,130 +1,145 @@
 from ggame import App, Color, LineStyle, Sprite, RectangleAsset, CircleAsset, EllipseAsset, PolygonAsset
 from math import sin, cos, tan, radians
-
+ 
 #inputs
 f = input("enter a function equal to f(x) in terms of x: ")         #user inputs the funciton they want
-a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function 
+a = int(input("what is the lower limit of your interval?: "))      #user inputs the domain of the function
 b = int(input("what is the upper limit of your interval?: "))      #user inputs the domain of the function
-
-
+ 
+ 
 ###############################################
 ### Creates function, first and second derivatives
-
+ 
 tstep = .01
 xyList0 = []
 t = a
 #create a list of xy values, each x will be tstep apart
 #f(x)
 while t<b+1:
-    x=t
-    xyList0.append((t, eval(f)))
-    t += tstep
-
-
+   x=t
+   xyList0.append((t, eval(f)))
+   t += tstep
+ 
+ 
 xyList1 = []
 t = a
 #create a list of xy values, each x will be tstep apart
 #f'(x)
 count = 0
 while t<b-tstep:
-    xyList1.append((t, (xyList0[count+1][1]-xyList0[count][1])/tstep ))
-    t += tstep
-    count += 1
-
+   xyList1.append((t, (xyList0[count+1][1]-xyList0[count][1])/tstep ))
+   t += tstep
+   count += 1
+ 
 xyList2 = []
 t = a
 count = 0
 #create a list of xy values, each x will be tstep apart
 #f''(x)
 while t<b-2*tstep:
-    xyList2.append((round(t, 7), round((xyList1[count+1][1]-xyList1[count][1])/tstep, 7) ))
-    t += tstep
-    count +=1
+   xyList2.append((round(t, 7), round((xyList1[count+1][1]-xyList1[count][1])/tstep, 7) ))
+   t += tstep
+   count +=1
 ################################################
 #finds prime functions
-
+ 
 CRIT = [] # list that will contains points
 t = a # gives starting point for x
 count = 0 # records position in current list and allows for access to second deriv
 currentN = 0 # current lowest point
 currentL = 1 # last lowest point
 diff = 0
-
+ 
 while t<b-2*tstep:
-    currentL = currentN # saves the current lowest value
-    diff = abs(xyList1[count][1]) - abs(xyList1[count-1][1]) # calculates wether or not approaching X axis
-    if abs(xyList1[count+1][1]) < abs(xyList1[count][1]): # if the next is less than the current
-        currentN = (xyList1[count+1][0], xyList1[count+1][1]) # set the current as the lowest
-
-    if currentN == currentL and diff<0:# if the saved and the new lowest are the same, and approaching Xaxis
-        CRIT.append((count-1, currentN[0], currentN[1])) # append value to inflection points (flex)
-    t += tstep #goes through the x values in the given range a to be in tstep steps
-    count +=1 #reffers to index placement
-
+   currentL = currentN # saves the current lowest value
+   diff = abs(xyList1[count][1]) - abs(xyList1[count-1][1]) # calculates wether or not approaching X axis
+   if abs(xyList1[count+1][1]) < abs(xyList1[count][1]): # if the next is less than the current
+       currentN = (xyList1[count+1][0], xyList1[count+1][1]) # set the current as the lowest
+ 
+   if currentN == currentL and diff<0:# if the saved and the new lowest are the same, and approaching Xaxis
+       CRIT.append((count-1, currentN[0], currentN[1])) # append value to inflection points (flex)
+   t += tstep #goes through the x values in the given range a to be in tstep steps
+   count +=1 #reffers to index placement
+ 
 #print("CRIT", CRIT)
-
+ 
 # Makes useful critical values
-
+ 
 crit = [(0, xyList0[0][0], xyList0[0][1])] #places start point as cirtical value
 Ucrit = [(xyList0[0][0], xyList0[0][1])]
-for x in CRIT: 
-    crit.append(x) 
-    Ucrit.append((xyList0[x[0]][0], xyList0[x[0]][1])) 
+for x in CRIT:
+   crit.append(x)
+   Ucrit.append((xyList0[x[0]][0], xyList0[x[0]][1]))
 crit.append((count+2, xyList0[count+2][0], xyList0[count+2][1])) #places the end point as critical value
 Ucrit.append((xyList0[count+2][0], xyList0[count+2][1]))
 # find increasing decreasing
-crease = [] 
+crease = []
 t=0
-while t<len(crit)-1: #while t is less then the length of the list of critical values list 
-    if xyList1[crit[t][0]+5][1] < 0: #if some point between the current and the next critical values is <0
-        crease.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": decreasing")) #its concave down
-    elif xyList1[crit[t][0]+5][1] > 0: #if some point between the current and the next critical values is >0
-        crease.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": increasing")) #its concave up
-    t+=1 #makes t = t+1
+while t<len(crit)-1: #while t is less then the length of the list of critical values list
+   if xyList1[crit[t][0]+5][1] < 0: #if some point between the current and the next critical values is <0
+       crease.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": decreasing")) #its concave down
+   elif xyList1[crit[t][0]+5][1] > 0: #if some point between the current and the next critical values is >0
+       crease.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": increasing")) #its concave up
+   t+=1 #makes t = t+1
 print()
-#print(Ucrit)
+print(crit)
 print()
 #print(crease)
-
-
+ 
+ 
 # Finds local Max and Min
 max = []
 Max = []
 min = []
 Min = []
 t = 0
-while t<len(crit):
-    if xyList2[crit[t][0]-t][1] < 0:
-        max.append(str(str(Ucrit[t])+" is a local max."))
-        Max.append(Ucrit[t])
-    elif xyList2[crit[t][0]-t][1] > 0:
-        min.append(str(str(Ucrit[t])+" is a local min."))
-        Min.append(Ucrit[t])
+ 
+for x in crit:
+    print(x, t)
+    if t+1>=len(crit):
+        print("Iran")
+        if xyList2[x[0] - 3][1] < 0:
+            min.append(str(str(Ucrit[t])+" is a local min."))
+            Min.append(Ucrit[t])
+    else:
+        if xyList2[x[0]][1] < 0:
+            min.append(str(str(Ucrit[t])+" is a local min."))
+            Min.append(Ucrit[t])
+   
+    if t+1>=len(crit):
+        if xyList2[x[0] - 3][1] > 0:
+            max.append(str(str(Ucrit[t])+" is a local max."))
+            Max.append(Ucrit[t])
+    else:
+        if xyList2[x[0]][1] > 0:
+            max.append(str(str(Ucrit[t])+" is a local max."))
+            Max.append(Ucrit[t])
     t+=1
+   
 print(min)
 print()
 print(max)
-
+ 
 N = [100,100]
-
+ 
 for x in Min:
-    if x[1] < N[1]:
-        N=x
+   if x[1] < N[1]:
+       N=x
 print()
 print("The absolute min is "+str(N)+". If your funciton is a basic sin or cos function, there are no absolute minimums")
-
+ 
 N = [-100, 100]
 for x in Max:
-    if x[1] < N[1]:
-        N=x
+   if x[1] < N[1]:
+       N=x
 print()
 print("The absolute max is "+str(N)+".")
-
-
-            
+ 
+ 
+ 
 ################################################
 ##### finds double prime functions
-
+ 
 # Finds the points of inflection by finding the ones that are close to zero
 flex = [] # list that will contains points
 t = a # gives starting point for x
@@ -132,39 +147,39 @@ count = 0 # records position in current list and allows for access to second der
 currentN = 0 # current lowest point
 currentL = 1 # last lowest point
 diff = 0
-
+ 
 while t<b-3*tstep:
-    currentL = currentN # saves the current lowest value
-    diff = abs(xyList2[count][1]) - abs(xyList2[count-1][1]) # calculates wether or not approaching X axis
-    if abs(xyList2[count+1][1]) < abs(xyList2[count][1]): # if the next is less than the current
-        currentN = (xyList2[count+1][0], xyList2[count+1][1]) # set the current as the lowest
-
-    if currentN == currentL and diff<0:# if the saved and the new lowest are the same, and approaching Xaxis
-        flex.append((count-1, currentN[0], currentN[1])) # append value to inflection points (flex)
-    t += tstep #goes through the x values in the given range a to be in tstep steps
-    count +=1 #reffers to index placement
-    
+   currentL = currentN # saves the current lowest value
+   diff = abs(xyList2[count][1]) - abs(xyList2[count-1][1]) # calculates wether or not approaching X axis
+   if abs(xyList2[count+1][1]) < abs(xyList2[count][1]): # if the next is less than the current
+       currentN = (xyList2[count+1][0], xyList2[count+1][1]) # set the current as the lowest
+ 
+   if currentN == currentL and diff<0:# if the saved and the new lowest are the same, and approaching Xaxis
+       flex.append((count-1, currentN[0], currentN[1])) # append value to inflection points (flex)
+   t += tstep #goes through the x values in the given range a to be in tstep steps
+   count +=1 #reffers to index placement
+ 
 # Makes useful critical values
 crit = [(0, xyList0[0][0], xyList0[0][1])] #places start point as cirtical value
-for x in flex: 
-    crit.append(x) 
+for x in flex:
+   crit.append(x)
 crit.append((count+2, xyList0[count+2][0], xyList0[count+2][1])) #places the end point as critical value
-
+ 
 # find concave up/down
-conch = [] 
+conch = []
 t=0
-while t<len(crit)-1: #while t is less then the length of the list of critical values list 
-    if xyList2[crit[t][0]+5][1] < 0: #if some point between the current and the next critical values is <0
-        conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave down")) #its concave down
-    elif xyList2[crit[t][0]+5][1] > 0: #if some point between the current and the next critical values is >0
-        conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave up")) #its concave up
-    t+=1 #makes t = t+1
-
+while t<len(crit)-1: #while t is less then the length of the list of critical values list
+   if xyList2[crit[t][0]+5][1] < 0: #if some point between the current and the next critical values is <0
+       conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave down")) #its concave down
+   elif xyList2[crit[t][0]+5][1] > 0: #if some point between the current and the next critical values is >0
+       conch.append(str("From "+str(crit[t][1])+" to "+str(crit[t+1][1])+": concave up")) #its concave up
+   t+=1 #makes t = t+1
+ 
 print ()
 print(conch)
 FLEX = []
 for x in flex:
-    FLEX.append((x[1], x[2]))
+   FLEX.append((x[1], x[2]))
 #print(xyList0)
 #print()
 #print(xyList1)
@@ -172,4 +187,3 @@ for x in flex:
 #print(xyList2)
 print()
 print("points of infelction for function f(x) in range", a, "to", b, " and the equal", FLEX)
-
